@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block head %}
+    <h1>Создание нового поста <h1/>
+{% endblock head %}
+
+{% block content %}
+<form action="{% url 'main:post_add' %}" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type = 'submit'> Создать пост </button>
+</form>
+
+{% endblock content %}

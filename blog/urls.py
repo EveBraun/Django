@@ -21,9 +21,12 @@ from main.views import index_root
 
 
 urlpatterns = [
-    # path('', index_root)
+    path('', index_root),
     path('admin/', admin.site.urls),
     # path('blog/posts/1/', index_root),
     # path('blog/posts', index_root),
-    path('blog/', include(blog_urls)),   
+    path('blog/', include(blog_urls)),  
+    # path('about/', about, name='about'), 
+    # path('contacts/', contacts, name='contacts'), 
+    # path('post_add/', post_add, name='post_add'), 
 ]
