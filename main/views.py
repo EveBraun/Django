@@ -18,7 +18,7 @@ def index_root(request):
 def index(request):
     return render(request, 'main/index.html', context={'menu': menu})
 
-# ДЗ!!!
+
 def about(request):
     return render(request, 'main/about.html')
 
@@ -45,11 +45,23 @@ def post_add(request):
         return render(request, 'main/post_add.html', context)
     
     if request.method == "POST":
-        post_form = PostForm(request.POST)
+        post_form = PostForm(request.POST, request.FILES)
+
         if post_form.is_valid():
             post = Post()
             post.author = post_form.cleaned_data['author']
             post.title = post_form.cleaned_data['title']
             post.text = post_form.cleaned_data['text']
-            post.save()
+            post.image = post_form.cleaned_data['image']
+
+            post.publish()
+            
             return post_list(request)
+        
+
+# 23/01/24
+def post_detail(request, pk):
+    post = Post.objects.get(pk=pk)
+    title = 'Info about post'
+    context = {'post': post, 'title': title}
+    return render(request, template_name="main/post_detail.html", context=context)
