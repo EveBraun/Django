@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from main import urls as blog_urls
 from main.views import index_root
+from blog import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -30,3 +32,6 @@ urlpatterns = [
     # path('contacts/', contacts, name='contacts'), 
     # path('post_add/', post_add, name='post_add'), 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

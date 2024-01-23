@@ -11,10 +11,12 @@
         {% for post in posts %}
             <tr>
                <td align='center'> {{post.author}}</td>
-               <td align='center'> {{post.title}}</td>
+               <td align='center'> <a href="{%url 'main:post_detail' pk=post.id %}">{{post.title}}</a></td>
                 <td align='center'> {{post.text}}</td>
                 <td align='center'> {{post.created_date}}</td>
             </tr>
         {% endfor %}
     {% endblock content %}
         
+
+    {% comment %} делаем кликабельным title {% endcomment %}
