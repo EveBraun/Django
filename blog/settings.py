@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'sorl.thumbnail'
+    'sorl.thumbnail',
+    'bootstrap4',
 ]
 
 # добавили стороннее приложение thumbnail
