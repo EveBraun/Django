@@ -24,13 +24,28 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="{% url menu.1.url_name %}"> {{menu.1.title}} </a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url menu.2.url_name %}"> {{menu.2.title}} </a>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url menu.3.url_name %}"> {{menu.3.title}} </a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" >
+                    {{menu.2.title}} 
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
               </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
             </div>
           </nav>
         {% endblock head %}

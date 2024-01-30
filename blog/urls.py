@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponseRedirect
 from main import urls as blog_urls
 from main.views import index_root
 from blog import settings
 from django.conf.urls.static import static
+from users import urls as users_urls
 
 
 urlpatterns = [
@@ -31,6 +33,7 @@ urlpatterns = [
     # path('about/', about, name='about'), 
     # path('contacts/', contacts, name='contacts'), 
     # path('post_add/', post_add, name='post_add'), 
+    path('users/', include(users_urls)),
 ]
 
 if settings.DEBUG:

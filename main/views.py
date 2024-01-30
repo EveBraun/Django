@@ -20,10 +20,12 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'main/about.html')
+    context={'menu': menu}
+    return render(request, 'main/about.html', context=context)
 
 def contacts(request):
-    return render(request, 'main/contacts.html')
+    context={'menu': menu}
+    return render(request, 'main/contacts.html', context=context)
 
 
 
