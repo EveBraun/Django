@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponsePermanentRedirect
+from django.contrib.auth.decorators import login_required
 from .models import Post
 from .forms import PostForm
 
@@ -12,11 +14,11 @@ menu = [{'title': 'Posts', 'url_name': 'main:post_list'},
 
 # главная страница сайта
 def index_root(request):
-    return render(request, 'main/index_root.html')
+    return redirect(post_list)
 
 # главная cтраница приложения main
 def index(request):
-    return render(request, 'main/index.html', context={'menu': menu})
+    return HttpResponsePermanentRedirect("/blog/posts")
 
 
 def about(request):
@@ -37,8 +39,7 @@ def post_list(request):
     context = {'posts': posts, 'menu': menu}
     return render(request, template_name='main/post_list.html', context=context)
 
-
-
+@login_required
 def post_add(request):
     title = "Создать пост"
     if request.method == "GET":
@@ -51,11 +52,10 @@ def post_add(request):
 
         if post_form.is_valid():
             post = Post()
-            post.author = post_form.cleaned_data['author']
+            post.author = request.user
             post.title = post_form.cleaned_data['title']
             post.text = post_form.cleaned_data['text']
             post.image = post_form.cleaned_data['image']
-
             post.publish()
             
             return post_list(request)

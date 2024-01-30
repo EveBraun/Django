@@ -10,8 +10,8 @@
 
         {% for post in posts %}
             <tr>
-               <td align='center'> {{post.author}}</td>
-               <td align='center'> <a href="{%url 'main:post_detail' pk=post.id %}">{{post.title}}</a></td>
+               <td align='center'> <a href="{% url "users:user_info" pk=post.author.id %}">{{post.author}}</a></td>
+               <td align='center'> <a href="{% url 'main:post_detail' pk=post.id %}">{{post.title}}</a></td>
                 <td align='center'> {{post.text}}</td>
                 <td align='center'> {{post.created_date}}</td>
             </tr>
