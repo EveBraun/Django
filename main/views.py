@@ -67,3 +67,38 @@ def post_detail(request, pk):
     title = 'Info about post'
     context = {'post': post, 'title': title}
     return render(request, template_name="main/post_detail.html", context=context)
+
+# 01.02.24
+def post_update(request, pk):
+    # получаем объект модели Пост
+    post = Post.objects.get(pk=pk)
+    title = 'Изменить пост'
+
+    # при отправке формы методом ПОСТ
+    if request.method == "POST":
+        # заполняем объект формы из запроса
+        form = PostForm(request.POST, request.FILES, instance=post)
+        # сохраняем форму
+        if form.is_valid():
+            form.save()
+            return redirect("main:post_detail", pk=pk)
+        
+        # если метод ГЕТ    
+    form = PostForm(instance=post)
+    return render(request, "main/post_update.html", context={"form":form, "title":title, "menu":menu})
+
+
+def post_delete(request, pk):   
+    post = Post.objects.filter(pk=pk).first()
+
+    if request.method == "POST":
+        if "delete" in request.POST:
+            post.delete()
+            return redirect("main:post_list")
+        if "cancel" in request.POST:
+            return redirect("main:post_list")
+
+    
+    form = PostForm(instance=post)
+    return render(request, "main/post_delete.html", context={"form":form, "menu":menu, "post":post})
+

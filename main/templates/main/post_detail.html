@@ -14,5 +14,7 @@
     {% thumbnail post.image "300x300" as im %}
     <img src="{{im.url}}" width="{{im.width}}" height="{{im.height}}">
     {% endthumbnail%}
-
+    <hr>
+    <a href="{% url "main:post_update" pk=post.id%}">Редактировать</a>
+    <a href="{% url "main:post_delete" pk=post.id%}">Удалить</a>
 {% endblock content %}
