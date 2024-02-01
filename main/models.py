@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Post(models.Model):
-    author = models.CharField(max_length=50, verbose_name='Author')
+    author = models.ForeignKey(User, on_delete = models.CASCADE, verbose_name='Автор')
     title = models.CharField(max_length=200, verbose_name='Title', blank=False)
     text = models.TextField(blank=False, verbose_name='Text')
     created_date = models.DateTimeField(default=timezone.now, editable=False)

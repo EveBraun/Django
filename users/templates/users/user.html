@@ -1,0 +1,12 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+<h1> Инфа о пользователе</h1>
+
+{% comment %} {% cache timeout cache_name dynamic_var %}
+    <form action='' method='post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <p><input type='submit' value='Войти'></p>
+    {% endblock content %}
+{% endcache %} {% endcomment %}
