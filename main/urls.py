@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from .views import index, post_list, about, contacts, post_add, post_detail, post_update, post_delete
+from .views import (index, post_list, about, contacts, 
+                    post_add, post_detail, post_update, post_delete, search)
 
 app_name = 'main'
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path('posts/<int:pk>/', post_detail, name='post_detail'),
     path('posts/<int:pk>/update/', post_update, name='post_update'),
     path('posts/<int:pk>/delete/', post_delete, name='post_delete'),
+    path('posts/search/', search, name='search'),
 ]

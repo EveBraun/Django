@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.http import HttpResponsePermanentRedirect
 from django.contrib.auth.decorators import login_required
@@ -32,10 +33,13 @@ def contacts(request):
 
 
 # отображение списка постов
-def post_list(request):
+def post_list(request, results=None):
+    if results is None:       
     # получаем все объекты таблицы(модели) Post
-    posts = Post.objects.all()
-    # заносим их  вобъкт-контекста для передачи в шаблон
+        posts = Post.objects.all()
+    else:
+        posts = results
+    # заносим их  в объeкт-контекста для передачи в шаблон
     context = {'posts': posts, 'menu': menu}
     return render(request, template_name='main/post_list.html', context=context)
 
@@ -102,3 +106,12 @@ def post_delete(request, pk):
     form = PostForm(instance=post)
     return render(request, "main/post_delete.html", context={"form":form, "menu":menu, "post":post})
 
+
+# 06/02/24
+def search(request):
+    query = request.GET.get('q')
+    ft = Q(title__icontains=query)| Q(text__icontains=query)
+    # results = Post.objects.filter(author__username=query)
+    results = Post.objects.filter(ft)
+    return post_list(request, results)
+# поиск по нескольким полям - магический оператор Q (meganit.com)
