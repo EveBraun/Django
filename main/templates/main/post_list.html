@@ -1,7 +1,10 @@
 {% extends "main/base.html" %}
-    {% block content %}
 
-    
+    {% block content %}
+    <form method='get' action='{% url "main:search" %}'>
+        <input type='text' name='q' value=''></input>
+        <input type='submit' value='search'></input>
+    </form>
         <table id='posts' border=1>
             <th>Author</th>
             <th>Title</th>
@@ -20,3 +23,7 @@
         
 
     {% comment %} делаем кликабельным title {% endcomment %}
+
+    {% comment %}
+        06/02/24 фильтр кастомный
+    {% endcomment %}
